@@ -19,6 +19,10 @@ Route::get('/sayhello/{name?}', function ($name = 'Batman') {
     if($name == 'Superman') {
         return redirect('/');
     }
+    //Cameron's prefered way of passing data to the view
+    // $name = 'Cameron';
+    // $data['name'] = $name;
+    // return view('sayhello')->with($data);
     return 'Hello there ' . $name;
 });
 
@@ -32,4 +36,12 @@ Route::get('/increment/{number?}', function ($number = 0) {
 
 Route::get('/add/{number1?}/{number2?}', function ($number1 = 0, $number2 = 0) {
     return ($number1 + $number2);
+});
+
+Route::get('/rolldice/{guess}', function ($guess = null) {
+    $randNum = rand(1, 6);
+    // $randNum = 5;
+    $data['randNum'] = $randNum;
+    $data['guess'] = $guess;
+    return view('roll-dice')->with($data);
 });
