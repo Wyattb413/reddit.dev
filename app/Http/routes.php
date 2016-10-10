@@ -21,3 +21,7 @@ Route::get('/sayhello/{name?}', function ($name = 'Batman') {
     }
     return 'Hello there ' . $name;
 });
+
+Route::get('/uppercase/{word?}', function ($word = 'uppercase') {
+    return strtoupper($word);
+});
