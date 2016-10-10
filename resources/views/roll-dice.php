@@ -39,8 +39,8 @@
         <div class="container">
             <div class="content">
                 <div class="title">You Guessed: <?= $guess; ?></div>
-                <div class="title">The Number was: <?= $randNum; ?></div>
-                <?php if($randNum == $guess) : ?>
+                <div class="title">The Number was: <?= $dice_roll; ?></div>
+                <?php if($correct) : ?>
                     <div class="title">You are Psychic¿</div>
                 <?php endif; ?>
             </div>

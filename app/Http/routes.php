@@ -39,9 +39,8 @@ Route::get('/add/{number1?}/{number2?}', function ($number1 = 0, $number2 = 0) {
 });
 
 Route::get('/rolldice/{guess}', function ($guess = null) {
-    $randNum = rand(1, 6);
-    // $randNum = 5;
-    $data['randNum'] = $randNum;
+    $data['dice_roll'] = mt_rand(1, 6);
     $data['guess'] = $guess;
+    $data['correct'] = ($data['dice_roll'] == $data['guess']);
     return view('roll-dice')->with($data);
 });
