@@ -29,3 +29,7 @@ Route::get('/uppercase/{word?}', function ($word = 'uppercase') {
 Route::get('/increment/{number?}', function ($number = 0) {
     return ($number += 1);
 });
+
+Route::get('/add/{number1?}/{number2?}', function ($number1 = 0, $number2 = 0) {
+    return ($number1 + $number2);
+});
