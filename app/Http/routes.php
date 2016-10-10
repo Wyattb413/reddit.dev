@@ -25,3 +25,7 @@ Route::get('/sayhello/{name?}', function ($name = 'Batman') {
 Route::get('/uppercase/{word?}', function ($word = 'uppercase') {
     return strtoupper($word);
 });
+
+Route::get('/increment/{number?}', function ($number = 0) {
+    return ($number += 1);
+});
