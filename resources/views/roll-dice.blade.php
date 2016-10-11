@@ -37,6 +37,7 @@
             a {
                 text-decoration: none;
                 font-size: 32px;
+                color: black;
             }
         </style>
     </head>
@@ -57,7 +58,7 @@
                 <hr>
                 @for ($i = 1; $i <= 6; $i ++)
                     <ul>
-                        <li><a href="/rolldice/{{$i}}">Guess: {{$i}}</li>
+                        <li><a href="{{ action('HomeController@rolldice', $i)}}">Guess: {{$i}}</li>
                     </ul>
                 @endfor
             </div>
