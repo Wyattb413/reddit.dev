@@ -31,18 +31,35 @@
             }
 
             .title {
-                font-size: 96px;
+                font-size: 30px;
+            }
+
+            a {
+                text-decoration: none;
+                font-size: 32px;
             }
         </style>
     </head>
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">You Guessed: <?= $guess; ?></div>
-                <div class="title">The Number was: <?= $dice_roll; ?></div>
-                <?php if($correct) : ?>
-                    <div class="title">You are Psychic¿</div>
-                <?php endif; ?>
+                <div class="title">You Guessed: {{$guess}}</div>
+                <hr>
+                @foreach ($dice_rolls as $dice_roll)
+                    @if ($dice_roll == $guess)
+                        <div class="title">The Roll Was: {{$dice_roll}}...You are Psychic¿</div>
+                        @else
+                            <div class="title">The Roll Was: {{$dice_roll}}</div>
+                    @endif
+                @endforeach
+                <br>
+                <div class="title">Make Another Guess</div>
+                <hr>
+                @for ($i = 1; $i <= 6; $i ++)
+                    <ul>
+                        <li><a href="/rolldice/{{$i}}">Guess: {{$i}}</li>
+                    </ul>
+                @endfor
             </div>
         </div>
     </body>
