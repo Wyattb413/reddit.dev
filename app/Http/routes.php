@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Post;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -11,11 +13,8 @@
 |
 */
 //
-// Route::get('/sayHello/{name}', 'HomeController@showWelcome');
-//
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
+//GETS
 
 Route::get('/', 'HomeController@showWelcome');
 
@@ -28,3 +27,24 @@ Route::get('/increment/{number?}', 'HomeController@increment');
 Route::get('/add/{number1?}/{number2?}', 'HomeController@add');
 
 Route::get('/rolldice/{guess}', 'HomeController@rolldice');
+
+//RESOURCES
+
+Route::resource('posts', 'PostsController');
+
+Route::get('orm-test', function ()
+{
+    $post = new Post();
+    $post->created_by = '1';
+    $post->title = 'title';
+    $post->url = 'url';
+    $post->content = 'content';
+    $post->save();
+
+    $post2 = new Post();
+    $post2->created_by = '1';
+    $post2->title = 'title';
+    $post2->url = 'url';
+    $post2->content = 'content';
+    $post2->save();
+});
