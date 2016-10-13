@@ -2,18 +2,18 @@
 
 @section('content')
     <div class="container">
-        @foreach ($posts as $post)
+        @foreach ($users as $user)
               <div class="well">
                   <div class="media">
-                  	<a class="pull-left" href="/posts/{{$post->id}}">
+                  	<a class="pull-left" href="#">
                 		<img class="media-object" src="http://placekitten.com/200/200">
               		</a>
               		<div class="media-body">
-                		<h4 class="media-heading"><a href="/posts/{{$post->id}}">{{$post->title}}</a></h4>
-                      <p class="text-left">{{$post->url}}</p>
-                      <p>{{$post->content}}</p>
+                		<h4 class="media-heading">{{$user->name}}</h4>
+                      <p class="text-left">{{$user->email}}</p>
+                      {{-- <p>{{$post->content}}</p> --}}
                       <ul class="list-inline list-unstyled">
-              			<li><span><i class="glyphicon glyphicon-calendar"></i>Posted On: {{$post->created_at->setTimezone('America/Chicago')->format('l, F jS Y')}}</span></li>
+              			<li><span><i class="glyphicon glyphicon-calendar"></i>Created On: {{$user->created_at->setTimezone('America/Chicago')->format('l, F jS Y')}}</span></li>
                         <li>|</li>
                         <span><i class="glyphicon glyphicon-comment"></i></span>
                         <li>|</li>
@@ -34,7 +34,7 @@
               </div>
         @endforeach
         <div class="row">
-            <div class="text-center">{!! $posts->render() !!}</div>
+            <div class="text-center">{!! $users->render() !!}</div>
         </div>
     </div>
 @stop

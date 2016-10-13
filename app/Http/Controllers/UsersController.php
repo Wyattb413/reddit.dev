@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Post;
+use Hash;
+use App\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class PostsController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +18,9 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(5);
-        $data['posts'] = $posts;
-        return view('posts.index')->with($data);
+        $users = User::paginate(5);
+        $data['users'] = $users;
+        return view('users.index')->with($data);
     }
 
     /**
@@ -29,7 +30,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        return view('users.create');
     }
 
     /**
@@ -41,24 +42,23 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'title' => 'required|min:5',
-            'url' => 'required',
-            'content' => 'required',
+            'username' => 'required',
+            'email' => 'required|min:5',
+            'password' => 'required|min:8',
+            'confirmPassword' => 'required|same:password',
         );
 
         $this->validate($request, $rules);
 
+        $user = new User();
+        $user->name = $request->input('username');
+        $user->email = $request->input('email');
+        $user->password = $request->input('password');
+        $user->save();
 
-        $post = new Post();
-        $post->created_by = 1;
-        $post->title = $request->input('title');
-        $post->url = $request->input('url');
-        $post->content = $request->input('content');
-        $post->save();
+        $request->session()->put('SUCCESS_MESSAGE', 'Account was created succesfully');
 
-        $request->session()->put('SUCCESS_MESSAGE', 'Post was saved succesfully');
-
-        return redirect('/posts');
+        return redirect('/users');
     }
 
     /**
@@ -69,9 +69,7 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $post = Post::find($id);
-        $data['post'] = $post;
-        return view('posts.show')->with($data);
+        //
     }
 
     /**
@@ -82,9 +80,7 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::find($id);
-        $data = ['post' => $post];
-        return view('posts.edit')->with($data);
+        //
     }
 
     /**
@@ -96,13 +92,7 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $post = Post::find($id);
-        $post->title = $request->title;
-        $post->url = $request->url;
-        $post->content = $request->content;
-        $post->save();
-
-        return redirect()->action('PostController@show', $post->$id);
+        //
     }
 
     /**
@@ -113,6 +103,6 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        return 'Destroy a post';
+        //
     }
 }

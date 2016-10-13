@@ -1,15 +1,30 @@
 @extends('layout.master')
 
-@section('styling')
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-@stop
-
 @section('content')
-	<form class="form" method="POST" action="{{ action('PostsController@store') }}">
-		{!! csrf_field() !!}
-		Title: <input class="form-control" type="text" name="title" value="{{ old('title') }}">
-		URL: <input class="form-control" type="text" name="url" value="{{ old('url') }}">
-		Content: <textarea class="form-control" name="content" rows="5" cols="40">{{ old('content') }}</textarea>
-		<input class="btn-success btn" type="submit">
-	</form>
+    <div class="container">
+        <div class="row">
+        	<form class="form" method="POST" action="{{ action('PostsController@store') }}">
+        		{!! csrf_field() !!}
+        		<input class="form-control" type="text" name="title" value="{{ old('title') }}" placeholder="Title">
+                @if ($errors->has('title'))
+                    <div class="alert alert-danger">
+                      <strong>Danger!</strong> {{$errors->first('title')}}
+                    </div>
+                @endif
+        		<input class="form-control" type="text" name="url" value="{{ old('url') }}" placeholder="URL">
+                @if ($errors->has('url'))
+                    <div class="alert alert-danger">
+                      <strong>Danger!</strong> {{$errors->first('url')}}
+                    </div>
+                @endif
+        		<textarea class="form-control" name="content" rows="5" cols="40" placeholder="Content">{{ old('content') }}</textarea>
+                @if ($errors->has('content'))
+                    <div class="alert alert-danger">
+                      <strong>Danger!</strong> {{$errors->first('content')}}
+                    </div>
+                @endif
+                <input class="btn-success btn customSubmitBtn" type="submit">
+        	</form>
+        </div>
+    </div>
 @stop

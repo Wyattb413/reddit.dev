@@ -1,0 +1,54 @@
+html {
+    background-color: black;
+    background-image: url(/img/waterfall.jpeg);
+    background-size: cover;
+}
+
+body {
+    background-color: transparent;
+    /*color: #e0e0e0;*/
+}
+
+.customSubmitBtn {
+    margin-top: 1vh;
+    width: 100%;
+}
+
+.customLogo {
+    margin-top: -20%;
+}
+
+.container .row form input {
+    margin-bottom: 1vh;
+}
+
+form input {
+    margin-bottom: 1vh;
+}
+
+form textarea {
+    margin-bottom: 1vh;
+}
+
+.navbar-form .form-control.searchField {
+    margin-top: 1vh;
+    width: 350px;
+}
+
+@media only screen and (max-width: 1217px) {
+    .navbar-form .form-control.searchField {
+        width: 150px;
+    }
+}
+
+@media only screen and (max-width: 1017px) {
+    .navbar-form .form-control.searchField {
+        width: 100px;
+    }
+}
+
+@media only screen and (max-width: 967px) {
+    .navbar-form .form-control.searchField {
+        width: 400px;
+    }
+}

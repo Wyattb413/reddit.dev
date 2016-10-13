@@ -1,12 +1,12 @@
-@extends('layouts.master')
+@extends('layout.master')
 
 @section('content')
-	<form class="form" method="POST" action="{{ action('PostsController@update', 1) }}">
+	<form class="form" method="POST" action="{{ action('PostsController@update', $post->id) }}">
 		{!! csrf_field() !!}
 		{!! method_field('PUT') !!}
-        Title: <input class="form-control" type="text" name="title" value="{{ old('title') }}">
-		URL: <input class="form-control" type="text" name="url" value="{{ old('url') }}">
-		Content: <textarea class="form-control" name="content" rows="5" cols="40">{{ old('content') }}</textarea>
-		<input class="btn-success btn" type="submit">
+        <input class="form-control" type="text" name="title" value="{{ (old('title') == null) ? $post->title : old('title') }}">
+		<input class="form-control" type="text" name="url" value="{{ (old('url') == null) ? $post->url : old('url') }}">
+		<textarea class="form-control" name="content" rows="5" cols="40">{{ (old('content') == null) ? $post->content : old('content') }}</textarea>
+		<input class="btn-success btn customSubmitBtn" type="submit">
 	</form>
 @stop
