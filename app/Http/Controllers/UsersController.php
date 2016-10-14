@@ -56,7 +56,7 @@ class UsersController extends Controller
         $user->password = $request->input('password');
         $user->save();
 
-        $request->session()->put('SUCCESS_MESSAGE', 'Account was created succesfully');
+        $request->session()->flash('SUCCESS_MESSAGE', 'Account was created succesfully');
 
         return redirect('/users');
     }
@@ -69,7 +69,9 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        $data['user'] = $user;
+        return view('users.show')->with($data);
     }
 
     /**
@@ -80,7 +82,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        $data['user'] = $user;
+        return view('users.edit')->with($data);
     }
 
     /**
@@ -92,7 +96,15 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = new User();
+        $user->name = $request->input('username');
+        $user->email = $request->input('email');
+        $user->password = $request->input('password');
+        $user->save();
+
+        $request->session()->flash('SUCCESS_MESSAGE', 'User was updated succesfully');
+
+        return redirect()->action('UsersController@show', $user->$id);
     }
 
     /**
@@ -101,8 +113,13 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+
+        $request->session()->flash('SUCCESS_MESSAGE', 'User was deleted succesfully');
+
+        return redirect()->action('UsersController@index');
     }
 }

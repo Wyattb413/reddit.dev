@@ -18,6 +18,8 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::paginate(5);
+        // var_dump($posts[0]->created_by);
+        // $author = $posts
         $data['posts'] = $posts;
         return view('posts.index')->with($data);
     }
@@ -41,7 +43,7 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'title' => 'required|min:5',
+            'title' => 'required',
             'url' => 'required',
             'content' => 'required',
         );
@@ -56,7 +58,7 @@ class PostsController extends Controller
         $post->content = $request->input('content');
         $post->save();
 
-        $request->session()->put('SUCCESS_MESSAGE', 'Post was saved succesfully');
+        $request->session()->flash('SUCCESS_MESSAGE', 'Post was saved succesfully');
 
         return redirect('/posts');
     }
@@ -102,7 +104,9 @@ class PostsController extends Controller
         $post->content = $request->content;
         $post->save();
 
-        return redirect()->action('PostController@show', $post->$id);
+        $request->session()->flash('SUCCESS_MESSAGE', 'Post was updated succesfully');
+
+        return redirect()->action('PostsController@show', $post->$id);
     }
 
     /**
@@ -111,8 +115,13 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        return 'Destroy a post';
+        $post = Post::find($id);
+        $post->delete();
+
+        $request->session()->flash('SUCCESS_MESSAGE', 'Post was deleted succesfully');
+
+        return redirect()->action('PostsController@index');
     }
 }

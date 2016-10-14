@@ -8,25 +8,25 @@
         		<input class="form-control" type="text" name="username" value="{{ old('username') }}" placeholder="Username">
                 @if ($errors->has('username'))
                     <div class="alert alert-danger">
-                      <strong>Danger!</strong> {{$errors->first('username')}}
+                      <strong>Warning:</strong> {{$errors->first('username')}}
                     </div>
                 @endif
         		<input class="form-control" type="text" name="email" value="{{ old('email') }}" placeholder="Email">
                 @if ($errors->has('email'))
                     <div class="alert alert-danger">
-                      <strong>Danger!</strong> {{$errors->first('email')}}
+                      <strong>Warning:</strong> {{$errors->first('email')}}
                     </div>
                 @endif
         		<input class="form-control" type="password" name="password" placeholder="Password">
                 @if ($errors->has('password'))
                     <div class="alert alert-danger">
-                      <strong>Danger!</strong> {{$errors->first('password')}}
+                      <strong>Warning:</strong> {{$errors->first('password')}}
                     </div>
                 @endif
                 <input class="form-control" type="password" name="confirmPassword" placeholder="Confirm Password">
                 @if ($errors->has('confirmPassword'))
                     <div class="alert alert-danger">
-                      <strong>Danger!</strong> {{$errors->first('confirmPassword')}}
+                      <strong>Warning:</strong> {{$errors->first('confirmPassword')}}
                     </div>
                 @endif
                 <input class="btn-success btn customSubmitBtn" type="submit">

@@ -16,7 +16,7 @@
       <ul class="nav navbar-nav">
         <li><a href="/posts">All Posts</a></li>
         <li><a href="/users">All Users</a></li>
-        <li class=""><a href="/posts/create">Post Ad<span class="sr-only"></span></a></li>
+        <li class=""><a href="/posts/create">Post<span class="sr-only"></span></a></li>
         <li><a href="#">Login</a></li>
         <li><a href="/users/create">Create An Account</a></li>
       </ul>

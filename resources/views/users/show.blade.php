@@ -4,16 +4,14 @@
     <div class="container">
       <div class="well">
           <div class="media">
-            <a class="pull-left" href="/posts/{{$post->id}}">
+            <a class="pull-left" href="/users/{{$user->id}}">
                 <img class="media-object" src="http://placekitten.com/200/200">
             </a>
             <div class="media-body">
-                <h4 class="media-heading"><a href="/posts/{{$post->id}}">{{$post->title}}</a></h4>
-              <p class="text-left">{{$post->url}}</p>
-              <p class="text-left">{{$post->created_by}}</p>
-              <p>{{$post->content}}</p>
+                <h4 class="media-heading"><a href="/users/{{$user->id}}">{{$user->name}}</a></h4>
+              <p class="text-left">{{$user->email}}</p>
               <ul class="list-inline list-unstyled">
-                <li><span><i class="glyphicon glyphicon-calendar"></i>{{$post->created_at}}</span></li>
+                <li><span><i class="glyphicon glyphicon-calendar"></i>{{$user->created_at}}</span></li>
                 <li>|</li>
                 <span><i class="glyphicon glyphicon-comment"></i></span>
                 <li>|</li>
@@ -25,7 +23,7 @@
                 <li>
                 </li>
                 </ul>
-                <button class="btn btn-default"><a href="/posts/{{$post->id}}/edit">Edit Post</a></button>
+                <button class="btn btn-default"><a href="/users/{{$user->id}}/edit">Edit User</a></button>
            </div>
         </div>
       </div>

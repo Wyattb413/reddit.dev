@@ -19,3 +19,12 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->words(6, true),
+        'url' => $faker->url,
+        'content' => $faker->realText($maxNbChars = 400, $indexSize = 2),
+        'created_by' => App\User::all()->random()->id,
+    ];
+});
