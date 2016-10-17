@@ -24,8 +24,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(5);
-        $data['users'] = $users;
+        $data['users'] = User::paginate(5);
         return view('users.index')->with($data);
     }
 
@@ -61,8 +60,8 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        $data['user'] = $user;
+        $data['user'] = User::findOrFail($id);
+        $data['posts'] = $data['user']->posts()->paginate(5);
         return view('users.show')->with($data);
     }
 
@@ -74,8 +73,7 @@ class UsersController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        $user = User::find($id);
-        $data['user'] = $user;
+        $data['user'] = User::find($id);
         return view('users.edit')->with($data);
     }
 

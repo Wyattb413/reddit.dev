@@ -16,19 +16,7 @@
                       <ul class="list-inline list-unstyled">
               			<li><span><i class="glyphicon glyphicon-calendar"></i>Created On: {{$user->created_at->setTimezone('America/Chicago')->format('l, F jS Y')}}</span></li>
                         <li>|</li>
-                        <span><i class="glyphicon glyphicon-comment"></i></span>
-                        <li>|</li>
-                        <li>
-                           <span class="glyphicon glyphicon-triangle-top"></span>
-                           <span class="glyphicon glyphicon-triangle-bottom"></span>
-                        </li>
-                        <li>|</li>
-                        <li>
-                        <!-- Use Font Awesome http://fortawesome.github.io/Font-Awesome/ -->
-                          <span><i class="fa fa-facebook-square"></i></span>
-                          <span><i class="fa fa-twitter-square"></i></span>
-                          <span><i class="fa fa-google-plus-square"></i></span>
-                        </li>
+                        <a href="/users/{{$user->id}}" class="btn btn-default">View User's Posts</a>
             			</ul>
                    </div>
                 </div>

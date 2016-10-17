@@ -18,12 +18,6 @@
                       <strong>Warning:</strong> {{$errors->first('password')}}
                     </div>
                 @endif
-                <input class="form-control" type="password" name="confirmPassword" placeholder="Confirm Password">
-                @if ($errors->has('confirmPassword'))
-                    <div class="alert alert-danger">
-                      <strong>Warning:</strong> {{$errors->first('confirmPassword')}}
-                    </div>
-                @endif
                 <input class="btn-success btn customSubmitBtn" type="submit">
         	</form>
         </div>

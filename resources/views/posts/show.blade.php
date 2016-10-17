@@ -10,7 +10,7 @@
             <div class="media-body">
                 <h4 class="media-heading"><a href="/posts/{{$post->id}}">{{$post->title}}</a></h4>
               <p class="text-left">{{$post->url}}</p>
-              <p class="text-left">{{$post->created_by}}</p>
+              <p class="text-left">{{$post->user->name}}</p>
               <p>{{$post->content}}</p>
               <ul class="list-inline list-unstyled">
                 <li><span><i class="glyphicon glyphicon-calendar"></i>{{$post->created_at}}</span></li>
@@ -25,7 +25,9 @@
                 <li>
                 </li>
                 </ul>
+                @if (Auth::check() && $post->created_by == Auth::id())
                 <button class="btn btn-default"><a href="/posts/{{$post->id}}/edit">Edit Post</a></button>
+                @endif
            </div>
         </div>
       </div>

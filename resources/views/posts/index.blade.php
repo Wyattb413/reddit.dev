@@ -11,7 +11,7 @@
               		<div class="media-body">
                 		<h4 class="media-heading"><a href="/posts/{{$post->id}}">{{$post->title}}</a></h4>
                       <p class="text-left">{{$post->url}}</p>
-                      <p class="text-left">{{$post->created_by}}</p>
+                      <p class="text-left">{{$post->user->name}}</p>
                       <p>{{$post->content}}</p>
                       <ul class="list-inline list-unstyled">
               			<li><span><i class="glyphicon glyphicon-calendar"></i>Posted On: {{$post->created_at->setTimezone('America/Chicago')->format('l, F jS Y')}}</span></li>

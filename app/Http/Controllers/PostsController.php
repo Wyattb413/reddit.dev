@@ -25,8 +25,9 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(5);
-        $data['posts'] = $posts;
+        $data['posts'] = Post::with('user')->paginate(5);
+        // $posts = Post::where('title', 'LIKE', '%and%')->get();
+        // dd($posts);
         return view('posts.index')->with($data);
     }
 
@@ -78,8 +79,7 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $post = Post::findOrFail($id);
-        $data['post'] = $post;
+        $data['post'] = Post::findOrFail($id);
         return view('posts.show')->with($data);
     }
 
