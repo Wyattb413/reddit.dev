@@ -22,9 +22,15 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['users'] = User::paginate(5);
+        if ($request->has('search')) {
+            $data['users'] = User::where('name', 'like', '%' . $request->search . '%')->
+                                   orWhere('email', 'like', '%' . $request->search . '%')->paginate(5);
+        } else {
+            $data['users'] = User::paginate(5);
+        }
+
         return view('users.index')->with($data);
     }
 

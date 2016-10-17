@@ -2,6 +2,11 @@
 
 @section('content')
     <div class="container">
+        @if(Request::has('search'))
+        <div class="row showingResults">
+            Showing Results {{$posts->firstItem()}} - {{$posts->lastItem()}} of {{$posts->total()}}
+        </div>
+        @endif
         @foreach ($posts as $post)
               <div class="well">
                   <div class="media">
@@ -23,19 +28,13 @@
                            <span class="glyphicon glyphicon-triangle-bottom"></span>
                         </li>
                         <li>|</li>
-                        <li>
-                        <!-- Use Font Awesome http://fortawesome.github.io/Font-Awesome/ -->
-                          <span><i class="fa fa-facebook-square"></i></span>
-                          <span><i class="fa fa-twitter-square"></i></span>
-                          <span><i class="fa fa-google-plus-square"></i></span>
-                        </li>
             			</ul>
                    </div>
                 </div>
               </div>
         @endforeach
         <div class="row">
-            <div class="text-center">{!! $posts->render() !!}</div>
+            <div class="text-center">{!! $posts->appends(['search' => Request::get('search')])->render() !!}</div>
         </div>
     </div>
 @stop

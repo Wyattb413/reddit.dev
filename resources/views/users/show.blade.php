@@ -11,7 +11,7 @@
                 <h4 class="media-heading"><a href="/users/{{$user->id}}">{{$user->name}}</a></h4>
               <p class="text-left">{{$user->email}}</p>
               <ul class="list-inline list-unstyled">
-                <li><span><i class="glyphicon glyphicon-calendar"></i>{{$user->created_at}}</span></li>
+                <li>User Since: {{$user->created_at}}</span></li>
                 <li>|</li>
                 </ul>
                 @if (Auth::check() && $user->id == Auth::id())

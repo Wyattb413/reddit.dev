@@ -27,11 +27,11 @@
         @endif
       </ul>
       <ul class="nav navbar-nav navbar-right">
-          <form class="navbar-form navbar-left">
+          <form class="navbar-form navbar-left" role="search" method="GET" action="{{action('PostsController@index')}}" id="searchPosts">
               <div class="form-group">
-                  <input type="text" class="form-control searchField" placeholder="Search">
+                  <input type="text" name="search" class="form-control searchField" placeholder="Search Posts">
+                  <button type="submit" class="btn btn-default">Submit</button>
               </div>
-              <button type="submit" class="btn btn-default">Submit</button>
           </form>
           {{-- <li class=""><a href="/posts/create">Post<span class="sr-only"></span></a></li> --}}
         @if (Auth::check())

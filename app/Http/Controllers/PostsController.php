@@ -23,11 +23,18 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['posts'] = Post::with('user')->paginate(5);
-        // $posts = Post::where('title', 'LIKE', '%and%')->get();
-        // dd($posts);
+        if($request->has('search')) {
+            $data['posts'] = Post::join('users', 'users.id', '=', 'posts.created_by')->
+                                   where('users.email', 'like', '%' . $request->search . '%')
+                                   ->orWhere('users.name', 'like', '%' . $request->search . '%')
+                                   ->orWhere('posts.title', 'like', '%' . $request->search . '%')
+                                   ->orWhere('posts.url', 'like', '%' . $request->search . '%')
+                                   ->orWhere('posts.content', 'like', '%' . $request->search . '%')->with('user')->paginate(5);
+        } else {
+            $data['posts'] = Post::orderBy('created_at', 'desc')->paginate(5);
+        }
         return view('posts.index')->with($data);
     }
 
@@ -131,4 +138,5 @@ class PostsController extends Controller
 
         return redirect()->action('PostsController@index');
     }
+
 }
