@@ -3,13 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 use App\Models\Post;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+
 class PostsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,8 +26,6 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::paginate(5);
-        // var_dump($posts[0]->created_by);
-        // $author = $posts
         $data['posts'] = $posts;
         return view('posts.index')->with($data);
     }
@@ -52,7 +58,7 @@ class PostsController extends Controller
 
 
         $post = new Post();
-        $post->created_by = 1;
+        $post->created_by = $request->user()->id;
         $post->title = $request->input('title');
         $post->url = $request->input('url');
         $post->content = $request->input('content');
@@ -60,6 +66,7 @@ class PostsController extends Controller
 
         $request->session()->flash('SUCCESS_MESSAGE', 'Post was saved succesfully');
 
+        Log::info($post);
         return redirect('/posts');
     }
 
@@ -71,7 +78,7 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
         $data['post'] = $post;
         return view('posts.show')->with($data);
     }
@@ -84,7 +91,7 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
         $data = ['post' => $post];
         return view('posts.edit')->with($data);
     }
@@ -98,7 +105,7 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
         $post->title = $request->title;
         $post->url = $request->url;
         $post->content = $request->content;
@@ -117,7 +124,7 @@ class PostsController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
         $post->delete();
 
         $request->session()->flash('SUCCESS_MESSAGE', 'Post was deleted succesfully');

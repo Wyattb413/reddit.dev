@@ -23,7 +23,9 @@
                 <li>
                 </li>
                 </ul>
-                <button class="btn btn-default"><a href="/users/{{$user->id}}/edit">Edit User</a></button>
+                @if (Auth::check() && $user->id == Auth::id())
+                    <a href="/users/{{$user->id}}/edit" class="btn btn-default">Edit User</a>
+                @endif
            </div>
         </div>
       </div>

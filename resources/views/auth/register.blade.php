@@ -3,12 +3,13 @@
 @section('content')
     <div class="container">
         <div class="row">
-        	<form class="form" method="POST" action="{{ action('UsersController@store') }}">
+        	<form class="form" method="POST" action="{{ action('Auth\AuthController@postRegister') }}">
         		{!! csrf_field() !!}
-        		<input class="form-control" type="text" name="username" value="{{ old('username') }}" placeholder="Username">
-                @if ($errors->has('username'))
+                <h1 class="createAnAccountHeader">Create An Account</h1>
+        		<input class="form-control" type="text" name="name" value="{{ old('name') }}" placeholder="Username">
+                @if ($errors->has('name'))
                     <div class="alert alert-danger">
-                      <strong>Warning:</strong> {{$errors->first('username')}}
+                      <strong>Warning:</strong> {{$errors->first('name')}}
                     </div>
                 @endif
         		<input class="form-control" type="text" name="email" value="{{ old('email') }}" placeholder="Email">
@@ -23,10 +24,10 @@
                       <strong>Warning:</strong> {{$errors->first('password')}}
                     </div>
                 @endif
-                <input class="form-control" type="password" name="confirmPassword" placeholder="Confirm Password">
-                @if ($errors->has('confirmPassword'))
+                <input class="form-control" type="password" name="password_confirmation" placeholder="Confirm Password">
+                @if ($errors->has('password_confirmation'))
                     <div class="alert alert-danger">
-                      <strong>Warning:</strong> {{$errors->first('confirmPassword')}}
+                      <strong>Warning:</strong> {{$errors->first('password_confirmation')}}
                     </div>
                 @endif
                 <input class="btn-success btn customSubmitBtn" type="submit">

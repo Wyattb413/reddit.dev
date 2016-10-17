@@ -11,6 +11,12 @@ use App\Http\Controllers\Controller;
 
 class UsersController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -41,20 +47,6 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = array(
-            'username' => 'required',
-            'email' => 'required|min:5',
-            'password' => 'required|min:8',
-            'confirmPassword' => 'required|same:password',
-        );
-
-        $this->validate($request, $rules);
-
-        $user = new User();
-        $user->name = $request->input('username');
-        $user->email = $request->input('email');
-        $user->password = $request->input('password');
-        $user->save();
 
         $request->session()->flash('SUCCESS_MESSAGE', 'Account was created succesfully');
 
@@ -80,7 +72,7 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $user = User::find($id);
         $data['user'] = $user;

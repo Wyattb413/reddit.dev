@@ -32,7 +32,7 @@ Route::get('/rolldice/{guess}', 'HomeController@rolldice');
 
 Route::resource('posts', 'PostsController');
 
-Route::resource('users', 'UsersController');
+Route::resource('users', 'UsersController', ['except' => ['create', 'store']]);
 
 Route::get('orm-test', function ()
 {
@@ -50,3 +50,12 @@ Route::get('orm-test', function ()
     $post2->content = 'content';
     $post2->save();
 });
+
+// Authentication routes...
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
+
+// Registration routes...
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
