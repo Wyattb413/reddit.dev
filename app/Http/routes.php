@@ -30,7 +30,10 @@ Route::get('/rolldice/{guess}', 'HomeController@rolldice');
 
 //RESOURCES
 
+Route::post('/posts/vote', 'PostsController@vote');
+
 Route::resource('posts', 'PostsController');
+
 
 Route::resource('users', 'UsersController', ['except' => ['create', 'store']]);
 

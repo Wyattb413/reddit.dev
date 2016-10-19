@@ -6,7 +6,6 @@ html {
 
 body {
     background-color: transparent;
-    /*color: #e0e0e0;*/
 }
 
 .customSubmitBtn {
@@ -67,3 +66,81 @@ form textarea {
     font-size: 2em;
     margin-left: .2em;
 }
+
+.voteButton {
+    background:none!important;
+    border:none;
+    padding:0!important;
+    font: inherit;
+}
+
+.inputPostId {
+    visibility: hidden;
+    position: absolute;
+}
+
+/*FOR POST SHOW PAGE*/
+    .postText {
+        color: white;
+    }
+
+    hr.style2 {
+    	border-top: 3px double #8c8b8b;
+    }
+
+/*FOR USER SHOW PAGE*/
+    .profileBackground {
+        background-color: #323232;
+    }
+
+    .profileImgDiv {
+    }
+
+    .header {
+        margin-left:10%;
+        margin-top:70px;
+    }
+
+    .img-thumbnail {
+        position:absolute;
+        top: 75px;
+        left:-75px;
+    }
+
+    .bg_blur
+    {
+        background-image:url('https://unsplash.it/400/400?random');
+        height: 300px;
+        background-size: cover;
+    }
+
+    .header{
+        color : #808080;
+        margin-left:10%;
+        margin-top:70px;
+    }
+
+    .picture{
+        height:150px;
+        width:150px;
+        position:absolute;
+        top: 75px;
+        left:-75px;
+    }
+
+    .picture_mob{
+        position: absolute;
+        width: 35%;
+        left: 35%;
+        bottom: 70%;
+    }
+
+    @media (max-width: 767px) {
+        .header{
+            text-align : center;
+        }
+
+        .nav{
+            margin-top : 30px;
+        }
+    }

@@ -18,8 +18,8 @@
         <li><a href="/users">All Users</a></li>
 
         @if (Auth::check())
+            <li class=""><a href="/users/{{Auth::id()}}">My Account<span class="sr-only"></span></a></li>
             <li class=""><a href="/posts/create">Post<span class="sr-only"></span></a></li>
-
         @else
             <li><a href="/auth/login">Login</a></li>
             <li><a href="/auth/register">Create An Account</a></li>

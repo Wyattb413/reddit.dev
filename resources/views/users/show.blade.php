@@ -1,11 +1,28 @@
 @extends('layout.master')
 
 @section('content')
+    <div class="container" style="margin-top: 20px; margin-bottom: 20px;">
+    	<div class="row panel">
+    		<div class="col-md-4 bg_blur ">
+    		</div>
+            <div class="col-md-8  col-xs-12">
+               <img src="https://unsplash.it/200/200?random" class="img-thumbnail picture hidden-xs" />
+               <img src="https://unsplash.it/200/200?random" class="img-thumbnail visible-xs picture_mob" />
+               <div class="header">
+                    <h1>{{$user->name}}</h1>
+                    <h4>{{$user->email}}</h4>
+                    <span>User Since: {{$user->created_at->diffForHumans()}}</span>
+                    @if (Auth::check() && $user->id == Auth::id())
+                        <a href="/users/{{$user->id}}/edit" class="btn btn-default">Edit User</a>
+                    @endif
+               </div>
+            </div>
+        </div>
+    </div>
     <div class="container">
-      <div class="well">
+      {{-- <div class="well">
           <div class="media">
             <a class="pull-left" href="/users/{{$user->id}}">
-                <img class="media-object" src="http://placekitten.com/200/200">
             </a>
             <div class="media-body">
                 <h4 class="media-heading"><a href="/users/{{$user->id}}">{{$user->name}}</a></h4>
@@ -19,7 +36,7 @@
                 @endif
            </div>
         </div>
-      </div>
+      </div> --}}
       <br>
       <br>
       <br>
@@ -27,7 +44,7 @@
               <div class="well">
                   <div class="media">
                     <a class="pull-left" href="/posts/{{$post->id}}">
-                        <img class="media-object" src="http://placekitten.com/200/200">
+                        <img class="media-object" src="https://unsplash.it/200/200?image={{$i++}}">
                     </a>
                     <div class="media-body">
                         <h4 class="media-heading"><a href="/posts/{{$post->id}}">{{$post->title}}</a></h4>
@@ -41,7 +58,9 @@
                         <li>|</li>
                         <li>
                            <span class="glyphicon glyphicon-triangle-top"></span>
+                           {{$post->getUpVotes()}}
                            <span class="glyphicon glyphicon-triangle-bottom"></span>
+                           {{$post->getDownVotes()}}
                         </li>
                         <li>|</li>
                         </ul>

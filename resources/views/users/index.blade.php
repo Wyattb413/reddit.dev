@@ -23,7 +23,7 @@
                             </a>
                           <p class="text-left">{{$user->email}}</p>
                           <ul class="list-inline list-unstyled">
-                  			<li><span><i class="glyphicon glyphicon-calendar"></i>Created On: {{$user->created_at->setTimezone('America/Chicago')->format('l, F jS Y')}}</span></li>
+                  			<li><span><i class="glyphicon glyphicon-calendar"></i>User Since: {{$user->created_at->diffForHumans()}}</span></li>
                             <li>|</li>
                             <a href="/users/{{$user->id}}" class="btn btn-default">View User's Posts</a>
                 			</ul>

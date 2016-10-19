@@ -68,6 +68,7 @@ class UsersController extends Controller
     {
         $data['user'] = User::findOrFail($id);
         $data['posts'] = $data['user']->posts()->paginate(5);
+        $data['i'] = rand(0, 1000);
         return view('users.show')->with($data);
     }
 

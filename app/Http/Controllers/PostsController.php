@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 use App\Models\Post;
+use App\Models\Vote;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -35,6 +36,7 @@ class PostsController extends Controller
         } else {
             $data['posts'] = Post::orderBy('created_at', 'desc')->paginate(5);
         }
+        $data['i'] = rand(0, 1000);
         return view('posts.index')->with($data);
     }
 
@@ -78,6 +80,24 @@ class PostsController extends Controller
         return redirect('/posts');
     }
 
+    public function vote(Request $request)
+    {
+        $user_id = $request->user()->id;
+        $post_id = $request->postId;
+        $vote = Vote::firstOrCreate(['user_id' => "$user_id", 'post_id' => "$post_id"]);
+        $vote->user_id = $user_id;
+        $vote->post_id = $post_id;
+        $vote->vote = $request->vote;
+        $vote->save();
+
+        $post = $vote->post;
+
+        $post->upVotes = $post->getUpVotes();
+        $post->downVotes = $post->getDownVotes();
+
+        return redirect("/posts/$post_id");
+    }
+
     /**
      * Display the specified resource.
      *
@@ -86,6 +106,7 @@ class PostsController extends Controller
      */
     public function show($id)
     {
+        // dd($_SERVER['REQUEST_URI']);
         $data['post'] = Post::findOrFail($id);
         return view('posts.show')->with($data);
     }
