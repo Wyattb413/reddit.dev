@@ -21,7 +21,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->string('url')->nullable();
             $table->text('content');
-            $table->boolean('vote');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
